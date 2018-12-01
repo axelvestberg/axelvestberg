@@ -8,21 +8,17 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
+          <h1>
+           Axel Vestberg
+          </h1>
         </header>
       </div>
     );
   }
 }
+
+var express = require("express");
+var app = express();
+var path = require('path');
 
 export default App;
