@@ -2,10 +2,12 @@ import "p5/lib/addons/p5.dom";
 
 export default function sketch(p) {
   let circles = [];
+  let snowflakes = [];
 
   p.setup = function() {
     p.createCanvas(window.innerWidth, window.innerHeight);
     this.circles();
+ 
    
   };
 
@@ -46,26 +48,32 @@ export default function sketch(p) {
   const text = () => {
     //title
     p.noStroke();
-    p.fill(235, 81, 96);
+    p.fill('white');
     p.textFont("Verdana");
     p.textSize(48);
     p.textStyle(p.BOLD);
     p.textAlign(p.CENTER);
     p.text("Axel Vestberg", window.innerWidth / 2, window.innerHeight / 2 - 70);
-    //subheading
-    p.fill(60)
+    //subheading (for some reason this is the color of snowflakes)
+    p.fill(240)
+    /*
     p.textSize(24);
     p.textStyle(p.NORMAL);
     p.textFont("Verdana");
     p.text(
-      "Building...",
+      "Christmas is coming.",
       window.innerWidth / 2,
       window.innerHeight / 2
     );
+    */
   };
 
+
   p.draw = () => {
-    p.background(140, 140, 140);
+      
+
+    if (window.innerWidth > 700) {
+        p.background(140, 140, 140);
     //loop through circles to draw them and draw lines between
     circles.forEach(c => {
       p.noStroke();
@@ -82,10 +90,55 @@ export default function sketch(p) {
         }
       });
     });
+} else {
+    p.background('brown');
+  let t = p.frameCount / 60; // update time
+
+  // create a random number of snowflakes each frame
+  for (var i = 0; i < p.random(2); i++) {
+    snowflakes.push(new p.snowflake()); // append snowflake object
+  }
+
+  // loop through snowflakes with a for..of loop
+  for (let flake of snowflakes) {
+    flake.update(t); // update snowflake position
+    flake.display(); // draw snowflake
+  }
+}
     text();
   };
-
-
+// snowflake class
+p.snowflake = function() {
+    // initialize coordinates
+    this.posX = 0;
+    this.posY = p.random(-50, 0);
+    this.initialangle = p.random(0, 2 * p.PI);
+    this.size = p.random(2, 5);
+  
+    // radius of snowflake spiral
+    // chosen so the snowflakes are uniformly spread out in area
+    this.radius = p.sqrt(p.random(p.pow(window.innerWidth / 2, 2)));
+  
+    this.update = function(time) {
+      // x position follows a circle
+      let w = 0.6; // angular speed
+      let angle = w * time + this.initialangle;
+      this.posX = window.innerWidth / 2 + this.radius * p.sin(angle);
+  
+      // different size snowflakes fall at slightly different y speeds
+      this.posY += p.pow(this.size, 0.5);
+  
+      // delete snowflake if past end of screen
+      if (this.posY > window.innerHeight) {
+        let index = snowflakes.indexOf(this);
+        snowflakes.splice(index, 1);
+      }
+    };
+  
+    this.display = function() {
+      p.ellipse(this.posX, this.posY, this.size);
+    };
+  }
 p.windowResized = function() {
     p.resizeCanvas(window.innerWidth, window.innerHeight);
   }
