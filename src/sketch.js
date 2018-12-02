@@ -2,13 +2,11 @@ import "p5/lib/addons/p5.dom";
 
 export default function sketch(p) {
   let circles = [];
-    let r, g, b;
+
   p.setup = function() {
     p.createCanvas(window.innerWidth, window.innerHeight);
     this.circles();
-    r = p.random(50, 255);
-    g = p.random(0, 200);
-    b = p.random(50, 255);
+   
   };
 
   //clean up after redirect
@@ -55,7 +53,7 @@ export default function sketch(p) {
     p.textAlign(p.CENTER);
     p.text("Axel Vestberg", window.innerWidth / 2, window.innerHeight / 2 - 70);
     //subheading
-    p.fill(179, 172, 167)
+    p.fill(60)
     p.textSize(24);
     p.textStyle(p.NORMAL);
     p.textFont("Verdana");
@@ -67,7 +65,7 @@ export default function sketch(p) {
   };
 
   p.draw = () => {
-    p.background(r, g, b);
+    p.background(140, 140, 140);
     //loop through circles to draw them and draw lines between
     circles.forEach(c => {
       p.noStroke();
@@ -85,12 +83,10 @@ export default function sketch(p) {
       });
     });
     text();
-    p.deviceMoved();
   };
 
-    p.deviceMoved = function() {   
-    r = p.map(p.accelerationX, -90, 90, 100, 175);
-    g = p.map(p.accelerationY, -90, 90, 100, 200);
-    b = p.map(p.accelerationZ, -90, 90, 100, 200);   
-}
+
+p.windowResized = function() {
+    p.resizeCanvas(window.innerWidth, window.innerHeight);
+  }
 }
