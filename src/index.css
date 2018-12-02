@@ -7,9 +7,54 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow: hidden;
+  background: #8c8c8c;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+#defaultCanvas0 {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+#header {
+  margin-top: 3vh;
+  right: 35%;
+  left: 35%;
+  width: 30%;
+  background: rgba(0,0,0,0.3);
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  border-radius: 3px;
+}
+
+
+#header, a {
+  position: relative;
+  z-index: 100;
+  text-align: center;
+}
+
+#header a {
+  width: 50%;
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 1.5vh;
+  font-size: 2vh;
+  text-decoration: none;
+  font-family: Verdana;
+}
+#header a:hover {
+  background-color: #8c8c8c80;
+  border-radius: 3px;
+}
+
+#header a.active {
+  background-color: rgba(0,0,0,0.5);
+  border-radius: 3px;
+}
+h1 {
+  text-align: center;
 }

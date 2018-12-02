@@ -6,6 +6,7 @@ export default function sketch(p) {
 
   p.setup = function() {
     p.createCanvas(window.innerWidth, window.innerHeight);
+ 
     this.circles();
  
    
