@@ -58,3 +58,8 @@ body {
 h1 {
   text-align: center;
 }
+
+#about-text {
+  margin: 24px;
+  font-family: verdana;
+}
